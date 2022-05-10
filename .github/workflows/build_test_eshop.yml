@@ -109,14 +109,17 @@ jobs:
           token: ${{secrets.WORKFLOW_TOKEN}}
 
       #load from cache
-      - name: Load node modules and build folder
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.npm 
-            ./node_modules
-            ./build
-          key: ${{ runner.os }}-build-${{ github.run_id }}
+      # - name: Load node modules and build folder
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: |
+      #       ~/.npm 
+      #       ./node_modules
+      #       ./build
+      #     key: ${{ runner.os }}-build-${{ github.run_id }}
+
+      - name: Install Ansible
+        run: pip3 install ansible boto boto3
 
 #TODO - deploy to AWS
       # - name: Deploy to Firebase
