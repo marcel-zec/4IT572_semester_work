@@ -3,7 +3,7 @@
   connection: local
 
   tasks:
-    - name: List of running instances
+    - name: List of running instances for termination
       ec2_instance_info:
         region: us-east-1
         aws_access_key: "{{access_key}}"
