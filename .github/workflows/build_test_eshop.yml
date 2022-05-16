@@ -101,6 +101,8 @@ jobs:
     needs: [Build, Test]
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/master' }}
+    env:
+      ANSIBLE_VAULT_PASSWORD_FILE: ~/.vault_pass.txt
 
     steps:
       - name: Git Checkout
@@ -120,6 +122,11 @@ jobs:
 
       - name: Install Ansible
         run: pip3 install ansible boto boto3
+
+      - name: Setting vault password
+        run: |
+          echo ${{ secrets.VAULT_PASS }} > vault_pass.txt  
+          chmod 400 vault_pass.txt
 
 #TODO - deploy to AWS
       # - name: Deploy to Firebase
