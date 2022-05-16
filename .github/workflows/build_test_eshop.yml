@@ -132,6 +132,16 @@ jobs:
           echo "$SSH_KEY_AWS" > devops.pem
           chmod 400 devops.pem
           sudo ssh-keygen -p -f devops.pem -m pem
+          
+      - name: Ansible Playbook
+        run: ansible-playbook ansible/ec2_deploy.yml --user ec2-user --key-file devops.pem --e @ansible/group_vars/all/aws.yml --vault-password-file vault_pass.txt
+
+          
+
+
+          
+
+          
 
 #TODO - deploy to AWS
       # - name: Deploy to Firebase
