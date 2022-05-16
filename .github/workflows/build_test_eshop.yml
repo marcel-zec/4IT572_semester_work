@@ -103,6 +103,7 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' }}
     env:
       ANSIBLE_VAULT_PASS: ${{ secrets.VAULT_PASS_AWS }}
+      SSH_KEY_AWS: ${{ secrets.SSH_KEY_AWS }}
       ANSIBLE_VAULT_PASSWORD_FILE: ~/.vault_pass.txt
 
     steps:
@@ -128,6 +129,9 @@ jobs:
         run: |
           echo "$ANSIBLE_VAULT_PASS" > vault_pass.txt 
           chmod 400 vault_pass.txt
+          echo "$SSH_KEY_AWS" > devops.pem
+          chmod 400 devops.pem
+          sudo ssh-keygen -p -f devops.pem -m pem
 
 #TODO - deploy to AWS
       # - name: Deploy to Firebase
