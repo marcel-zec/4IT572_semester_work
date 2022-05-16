@@ -102,7 +102,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/master' }}
     env:
-      ANSIBLE_VAULT: ${{ secrets.VAULT_PASS }}
+      ANSIBLE_VAULT_PASS: ${{ secrets.VAULT_PASS_AWS }}
       ANSIBLE_VAULT_PASSWORD_FILE: ~/.vault_pass.txt
 
     steps:
@@ -126,8 +126,7 @@ jobs:
 
       - name: Setting vault password
         run: |
-          echo "$ANSIBLE_VAULT" > vault_pass.txt 
-          echo "$ANSIBLE_VAULT" 
+          echo "$ANSIBLE_VAULT_PASS" > vault_pass.txt 
           chmod 400 vault_pass.txt
 
 #TODO - deploy to AWS
